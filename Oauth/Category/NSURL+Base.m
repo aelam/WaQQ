@@ -32,7 +32,7 @@
 - (NSString *)URLStringWithoutQuery 
 {
     NSArray *parts = [[self absoluteString] componentsSeparatedByString:@"?"];
-	RLog(@"%@",parts);
+	//RLog(@"%@",parts);
     return [parts objectAtIndex:0];
 }
 

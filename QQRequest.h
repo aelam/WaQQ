@@ -15,6 +15,12 @@
 #import "OADataFetcher.h"
 #import "Key.h"
 
+//@protocol QQRequestDelegate 
+//
+//- (void)
+//
+//@end
+
 
 @interface QQRequest : NSObject {
 	OAConsumer *consumer;
@@ -22,6 +28,8 @@
 	OAToken *token;
 }
 
-- (void)requestHomeTimelinewithFormat:(NSString *)format page:(NSInteger)page itemCount:(NSInteger)count time:(NSInteger)time;
+@property (nonatomic,retain)OAToken *token;
+
+- (void)requestHomeTimelinewithFormat:(NSString *)format pageflag:(NSInteger)pageflag itemCount:(NSInteger)count time:(NSInteger)time;
 
 @end

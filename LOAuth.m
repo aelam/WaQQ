@@ -41,7 +41,7 @@
 
 
 - (void)startRequestToken {
-	NSLog(@"[%d]:%s",__LINE__,__FUNCTION__);
+	//NSLog(@"[%d]:%s",__LINE__,__FUNCTION__);
 	
 	self.hmacSha1Request = [[OAMutableURLRequest alloc] 
 									initWithURL:[NSURL URLWithString:REQUEST_TOKEN_STRING]

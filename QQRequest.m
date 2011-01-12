@@ -11,6 +11,13 @@
 
 @implementation QQRequest
 
+@synthesize token;
+
+- (void)dealloc {
+	self.token = nil;
+	[super dealloc];
+}
+
 - (id)init {
 	if (self = [super init]) {
 		consumer = [[OAConsumer alloc] initWithKey:API_KEY secret:API_SECRET];
@@ -47,12 +54,19 @@
  http://open.t.qq.com/api/statuses/home_timeline?format=json&pageflag=0&reqnum=20&pagetime=0
  */
 static NSString *homeTimeLineBase = @"http://open.t.qq.com/api/statuses/home_timeline";
+static NSString *publicTimeLineBase = @"http://open.t.qq.com/api/statuses/public_timeline";
+static NSString *userTimeLineBase = @"http://open.t.qq.com/api/statuses/user_timeline";
+static NSString *mentionsTimeLineBase = @"http://open.t.qq.com/api/statuses/mentions_timeline";
+static NSString *htTimeLineBase = @"http://open.t.qq.com/api/statuses/ht_timeline";
+static NSString *broadcastTimeLineBase = @"http://open.t.qq.com/api/statuses/broadcast_timeline";
 
-- (void)requestHomeTimelinewithFormat:(NSString *)format page:(NSInteger)page itemCount:(NSInteger)count time:(NSInteger)time {
-	
-	
-	NSString *params = [NSString stringWithFormat:@"%@?format=%@&pageflag=%d&reqnum=%d&pagetime=%d",homeTimeLineBase,format,page,count,time];
-	RLog(@"%@",params);
+
+- (void)requestHomeTimelinewithFormat:(NSString *)format pageflag:(NSInteger)pageflag itemCount:(NSInteger)count time:(NSInteger)time {
+		
+	NSString *params = [NSString stringWithFormat:
+							@"%@?format=%@&pageflag=%d&reqnum=%d&pagetime=%d",
+							homeTimeLineBase,format,pageflag,count,time
+						];
 	NSURL *requestURL = [NSURL URLWithString:params];
 	
 	OAMutableURLRequest *hmacSha1Request = [[OAMutableURLRequest alloc] initWithURL:requestURL

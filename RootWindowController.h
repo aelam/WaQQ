@@ -7,12 +7,26 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+#import "QUserInfoRequest.h"
 
-@interface RootWindowController : NSWindowController {
-	IBOutlet WebView *webview;
+@class NewsViewController;
+@class ProfileController;
+@class User;
+
+@interface RootWindowController : NSWindowController <QUserInfoRequestDelegate,NSToolbarDelegate>{
+
+	NewsViewController	*newsViewController;
+	ProfileController	*profileController;
+	IBOutlet id headImageView;
+	User	*me;
+	NSDictionary *profileDic;
+	
 }
 
+@property (retain) IBOutlet NewsViewController *newsViewController;
+
+
 - (IBAction)login:(id)sender;
+- (IBAction)viewProfile:(id)sender;
 
 @end

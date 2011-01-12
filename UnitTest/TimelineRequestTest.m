@@ -24,7 +24,7 @@
 }
 
 - (void)testHomeTimeLine {
-	[request requestHomeTimelinewithFormat:@"json" page:1 itemCount:2 time:0];
+	[request requestHomeTimelinewithFormat:@"json" pageflag:0 itemCount:2 time:0];
 }
 
 - (void)tearDown {

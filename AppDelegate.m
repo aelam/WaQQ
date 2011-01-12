@@ -69,10 +69,11 @@
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
 	
-	QQRequest *request  = [[QQRequest alloc] init];
-	[request requestHomeTimelinewithFormat:@"" page:1 itemCount:1 time:0];
+//	QQRequest *request  = [[QQRequest alloc] init];
+//	[request requestHomeTimelinewithFormat:@"" pageflag:0 itemCount:1 time:0];
+
 	// load the app's main window for display
-	rootWindowController = [[RootWindowController alloc] initWithWindowNibName:@"MainWindow"];
+	rootWindowController = [[RootWindowController alloc] init];
 	[rootWindowController showWindow:self];
 }
 

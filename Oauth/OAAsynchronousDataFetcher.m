@@ -28,6 +28,8 @@
 
 @implementation OAAsynchronousDataFetcher
 
+@synthesize delegate;
+
 + (id)asynchronousFetcherWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector
 {
 	return [[[OAAsynchronousDataFetcher alloc] initWithRequest:aRequest delegate:aDelegate didFinishSelector:finishSelector didFailSelector:failSelector] autorelease];
@@ -38,9 +40,10 @@
 	if (self = [super init])
 	{
 		request = [aRequest retain];
-		delegate = aDelegate;
+		delegate = [aDelegate retain];
 		didFinishSelector = finishSelector;
 		didFailSelector = failSelector;	
+		//NSLog(@"delegate %@",delegate);
 	}
 	return self;
 }
@@ -88,6 +91,7 @@
 	if (connection) [connection release];
 	if (response) [response release];
 	if (responseData) [responseData release];
+	[delegate release];
 	[super dealloc];
 }
 

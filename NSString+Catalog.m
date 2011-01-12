@@ -91,7 +91,7 @@ NSString *hmac_sha1(NSString *key,NSString *text){
 */
 + (NSString *)signClearText:(NSString *)text withSecret:(NSString *)secret 
 {
-	NSLog(@"[LINE:%d] text %@, secret :%@",__LINE__,text,secret);
+	//NSLog(@"[LINE:%d] text %@, secret :%@",__LINE__,text,secret);
     NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
     NSData *clearTextData = [text dataUsingEncoding:NSUTF8StringEncoding];
     unsigned char result[20];
