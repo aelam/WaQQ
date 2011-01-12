@@ -24,12 +24,12 @@
 		self.delegate = d;
 		consumer = [[OAConsumer alloc] initWithKey:API_KEY secret:API_SECRET];
 		hmacSha1Provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+		
 	}
 	return self;
 }
 
 - (void)dealloc {
-//	self.webview = nil;
 	self.delegate = nil;
 	[consumer release];
 	[hmacSha1Provider release];
@@ -41,16 +41,15 @@
 
 
 - (void)startRequestToken {
-	//NSLog(@"[%d]:%s",__LINE__,__FUNCTION__);
 	
-	self.hmacSha1Request = [[OAMutableURLRequest alloc] 
+	self.hmacSha1Request = [[[OAMutableURLRequest alloc] 
 									initWithURL:[NSURL URLWithString:REQUEST_TOKEN_STRING]
 									consumer:consumer
 									token:NULL
 									realm:NULL
 									callback:CALL_BACK_URL
 									signatureProvider:hmacSha1Provider
-							];
+							] autorelease];
 	OADataFetcher *fetcher = [[[OADataFetcher alloc] init] autorelease];
     [fetcher fetchDataWithRequest:hmacSha1Request 
 			delegate:self
@@ -72,16 +71,16 @@
 								token:token
 								realm:NULL
 								callback:NULL
-								signatureProvider:hmacSha1Provider] 
-								autorelease];
-	self.hmacSha1Request1.verifier = verifier;
-		
+								signatureProvider:hmacSha1Provider
+							 ]autorelease] ;
+	self.hmacSha1Request1.verifier = verifier;		
 	OADataFetcher *fetcher = [[[OADataFetcher alloc] init] autorelease];
     [fetcher fetchDataWithRequest:hmacSha1Request1 
 		delegate:self
 		didFinishSelector:@selector(requestTokenTicket:finishedWithData:)
 		didFailSelector:@selector(requestTokenTicket:failedWithError:)
 	];
+
 }
 
 
@@ -107,7 +106,7 @@
 		[[NSAppleEventManager sharedAppleEventManager] removeEventHandlerForEventClass:kInternetEventClass andEventID:kAEGetURL];
 		NSString *responseBody = [[NSString alloc] initWithData:data
 													   encoding:NSUTF8StringEncoding];
-		NSLog(@"responseBody:%@",responseBody);
+		RLog(@"authorize success!! responseBody:%@",responseBody);
 		[[NSUserDefaults standardUserDefaults] setValue:responseBody forKey:@"ACCESS_BODY"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		self.token = [[[OAToken alloc] initWithHTTPResponseBody:responseBody] autorelease];
@@ -146,9 +145,11 @@
 		}
 	}	
 	
+	RLog(@"oauth_verifier",verifier);
 	[self startAccessOauthWithVerifier:verifier];
 }
 
+/*
 - (NSString *)requestTokenFromResponseBody:(NSString *)body {
 	NSString *requestToken = nil;
 	NSString *requestToekenSecret = nil;
@@ -168,6 +169,6 @@
 	}
 	
 	return requestToken;
-}
+}*/
 
 @end

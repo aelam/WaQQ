@@ -7,7 +7,6 @@
 //
 
 #import "RootWindowController.h"
-#import "LOAuth.h"
 #import "NewsViewController.h"
 #import "QQRequest.h"
 #import "ProfileController.h"
@@ -31,7 +30,6 @@
 - (id)init {
 	if (self = [super initWithWindowNibName:@"MainWindow"]) {
 		QUserInfoRequest *request = [[[QUserInfoRequest alloc] initWithDelegate:self] autorelease];
-		//RLog();
 		[request requestMyProfileWithJSONFormat];
 	}
 	return self;
@@ -57,7 +55,8 @@
 
 
 - (IBAction)login:(id)sender {
-	
+	LOAuth *oauth = [[LOAuth alloc] initWithDelegate:self];
+	[oauth startRequestToken];
 }
 
 - (IBAction)viewProfile:(id)sender {

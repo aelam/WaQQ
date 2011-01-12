@@ -11,6 +11,7 @@
 
 @protocol QUserInfoRequestDelegate<NSObject>
 
+@optional
 - (void)requestUserInfoStatus:(BOOL)status user:(User *)aUser;
 - (void)requestUserInfoStatus:(BOOL)status userDic:(NSDictionary *)aUserDic;
 

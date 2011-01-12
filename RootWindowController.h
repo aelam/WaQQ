@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "QUserInfoRequest.h"
+#import "LOAuth.h"
 
 @class NewsViewController;
 @class ProfileController;
 @class User;
 
-@interface RootWindowController : NSWindowController <QUserInfoRequestDelegate,NSToolbarDelegate>{
+@interface RootWindowController : NSWindowController <QUserInfoRequestDelegate,NSToolbarDelegate,LOAuthDelegate>{
 
 	NewsViewController	*newsViewController;
 	ProfileController	*profileController;
