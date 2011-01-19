@@ -31,7 +31,9 @@
 //	[userInfoDic release]; 
 //	userInfoDic = [aUserDic retain];
 	[self setUserInfoDic:aUserDic];
-	[self setHead];
+	[self setHead:^(NSImage *image) {
+		headImageView.image = image;
+	}];
 		
 	NSWindow *window = [self window];
 	
@@ -58,6 +60,25 @@
 	
 }
 */
+- (void)setHead:(void(^)(NSImage *image))myBlock {
+	
+	dispatch_queue_t current_queue = dispatch_get_current_queue();
+	dispatch_queue_t download_queue = dispatch_queue_create("com.yuxi.download",NULL);
+	
+	dispatch_async(download_queue,^{
+		NSString *imageURL = [userInfoDic objectForKey:@"head"];
+		NSString *imageURL40Pixel = [imageURL stringByAppendingString:@"/40"];
+		NSURL *url = [NSURL URLWithString:imageURL40Pixel];
+		NSImage *image = [[[NSImage alloc] initWithContentsOfURL:url] autorelease];
+		dispatch_async(current_queue,^{
+			myBlock(image);
+		});
+	});
+	
+	dispatch_release(download_queue);
+	
+}
+
 
 - (void)setHead {
 	NSURL *url = [NSURL URLWithString:[userInfoDic objectForKey:@"head"]];

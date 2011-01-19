@@ -8,9 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class QQTimeLineRequest;
 
 @interface NewsViewController : NSViewController <NSTableViewDelegate,NSTableViewDataSource>{
 	IBOutlet NSTableView *newsTable;
+	IBOutlet NSArrayController *newsArrayController;
+	
+	QQTimeLineRequest *request;
 }
 
 @end

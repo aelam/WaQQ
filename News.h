@@ -15,6 +15,7 @@
 	NSString	*origText;
 	NSString	*from;
 	NSString	*imageURL;
+	NSString	*timeStamp;
 	BOOL		*isSentBySelf;
 	User		*sender;
 	NSInteger	*newsType;	// type:微博类型 1-原创发表、2-转载、3-私信 4-回复 5-空回 6-提及
@@ -26,6 +27,7 @@
 @property (copy) NSString	*origText;
 @property (copy) NSString	*from;
 @property (copy) NSString	*imageURL;
+@property (copy) NSString	*timeStamp;
 @property (retain) User		*sender;
 @property	BOOL			*isSentBySelf;
 @property	NSInteger		*newsType;	// type:微博类型 1-原创发表、2-转载、3-私信 4-回复 5-空回 6-提及

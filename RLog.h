@@ -5,6 +5,7 @@
 //  Copyright 2010 YuxiPacific All rights reserved.
 //
 
+#define DEBUG
 
 #define _R_Log(fmt,...) NSLog(fmt,__LINE__,__FUNCTION__,##__VA_ARGS__) 
 

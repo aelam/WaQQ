@@ -60,6 +60,7 @@
 }
 
 // QQ NEEDS A VERIFIER 
+// The verifier returns from - [LOAuth startRequestToken]
 - (void)startAccessOauthWithVerifier:(NSString *)verifier {
 	
 	if (hmacSha1Request1) {
@@ -94,7 +95,7 @@
 		RLog(@"获得未授权的KEY:%@",responseBody);
 		self.token = [[[OAToken alloc] initWithHTTPResponseBody:responseBody] autorelease];
 
-		// WATCH THE USL SCHEMA
+		// WATCH THE URL SCHEMA
 		[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 		NSString *url = [NSString stringWithFormat:@"%@?%@",AUTHORIZE_STRING,responseBody];
 		[responseBody release];

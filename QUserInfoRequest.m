@@ -84,11 +84,11 @@ static NSString *othersInfoBase = @"http://open.t.qq.com/api/user/other_info";
 - (void)requestTokenTicket:(OAServiceTicket *)ticket finishedWithData:(NSMutableData *)data {
 	NSString *responseBody = [[NSString alloc] initWithData:data
 												   encoding:NSUTF8StringEncoding];
-	RLog(@"responseBody:%@",responseBody);
+	RTrace(@"responseBody:%@",responseBody);
 	SBJsonParser *parser = [[SBJsonParser new] autorelease];
 	id rs = [parser objectWithData:data];
 	if (!rs) return;
-	RLog(@"is Dictionary :rs %@, %d",rs,[rs isNSDictionary],rs);
+	RTrace(@"is Dictionary :rs %@, %d",rs,[rs isNSDictionary],rs);
 	if (![rs isNSDictionary]) return;
 	NSDictionary *level1 = [(NSDictionary *)rs objectForKey:@"data"];
 	if ([delegate respondsToSelector:@selector(requestUserInfoStatus:userDic:)]) {

@@ -15,20 +15,23 @@
 #import "OADataFetcher.h"
 #import "Key.h"
 
-//@protocol QQRequestDelegate 
-//
-//- (void)
-//
-//@end
+@protocol QQRequestDelegate <NSObject>
+
+- (void)responseWithNewsArray:(NSArray *)array;
+
+@end
 
 
 @interface QQRequest : NSObject {
 	OAConsumer *consumer;
 	OAHMAC_SHA1SignatureProvider	*hmacSha1Provider;
 	OAToken *token;
+	
+	//id <QQRequestDelegate> delegate;
 }
 
 @property (nonatomic,retain)OAToken *token;
+@property (nonatomic,assign)id <QQRequestDelegate> delegate;
 
 - (void)requestHomeTimelinewithFormat:(NSString *)format pageflag:(NSInteger)pageflag itemCount:(NSInteger)count time:(NSInteger)time;
 

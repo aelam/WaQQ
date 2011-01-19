@@ -8,13 +8,16 @@
 
 #import "QQRequest.h"
 #import "RLog.h"
+#import "JSON.h"
 
 @implementation QQRequest
 
 @synthesize token;
+//@synthesize delegate;
 
 - (void)dealloc {
 	self.token = nil;
+//	self.delegate = nil;
 	[super dealloc];
 }
 
@@ -60,9 +63,9 @@ static NSString *mentionsTimeLineBase = @"http://open.t.qq.com/api/statuses/ment
 static NSString *htTimeLineBase = @"http://open.t.qq.com/api/statuses/ht_timeline";
 static NSString *broadcastTimeLineBase = @"http://open.t.qq.com/api/statuses/broadcast_timeline";
 
-
 - (void)requestHomeTimelinewithFormat:(NSString *)format pageflag:(NSInteger)pageflag itemCount:(NSInteger)count time:(NSInteger)time {
-		
+	
+	RLog();
 	NSString *params = [NSString stringWithFormat:
 							@"%@?format=%@&pageflag=%d&reqnum=%d&pagetime=%d",
 							homeTimeLineBase,format,pageflag,count,time
@@ -76,23 +79,36 @@ static NSString *broadcastTimeLineBase = @"http://open.t.qq.com/api/statuses/bro
 												callback:NULL
 												signatureProvider:hmacSha1Provider
 											];
-	OADataFetcher *fetcher = [[[OADataFetcher alloc] init] autorelease];
-    [fetcher fetchDataWithRequest:hmacSha1Request 
-			delegate:self
-			didFinishSelector:@selector(requestTokenTicket:finishedWithData:)
-			didFailSelector:@selector(requestTokenTicket:failedWithError:)
-	];
 	
+//	dispatch_queue_t *download_queue = dispatch_queue_create("Download Queu", NULL);
+//	dispatch_async(download_queue, ^{
+		OADataFetcher *fetcher = [[[OADataFetcher alloc] init] autorelease];
+		[fetcher fetchDataWithRequest:hmacSha1Request 
+							 delegate:self
+					didFinishSelector:@selector(requestTokenTicket:finishedWithData:)
+					  didFailSelector:@selector(requestTokenTicket:failedWithError:)
+		 ];
+//		
+//	})	
 }
 
 - (void)requestTokenTicket:(OAServiceTicket *)ticket finishedWithData:(NSMutableData *)data {
-	NSString *responseBody = [[NSString alloc] initWithData:data
-												   encoding:NSUTF8StringEncoding];
-	RLog(@"responseBody:%@",responseBody);
+//	NSString *responseBody = [[NSString alloc] initWithData:data
+//												   encoding:NSUTF8StringEncoding];
+	//RLog(@"responseBody:%@",responseBody);
+	SBJsonParser *parser = [[SBJsonParser new] autorelease];
+	id rs = [parser objectWithData:data];
+	//RLog(@"responseBody : %@",rs);
+	
+//	if ([delegate respondsToSelector:@selector(responseWithNewsArray:)]) {
+//		[delegate responseWithNewsArray:rs];
+//	}
+	
+	
 }
 
 - (void)requestTokenTicket:(OAServiceTicket *)ticket failedWithError:(NSError *)error {
-	NSLog(@"%@",error);
+	RLog(@"%@",error);
 	//	[self hideWebPage];
 	// then show alertview
 }

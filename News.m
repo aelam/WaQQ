@@ -11,13 +11,19 @@
 
 @implementation News
 
-@synthesize text,origText,from,imageURL,newsType,isSentBySelf,sender,newsId,count;
+@synthesize text,origText,from,imageURL,timeStamp,newsType,isSentBySelf,sender,newsId,count;
 
 
 - (void)dealloc {
-	self.text = nil;
-	self.origText = nil;
-	self.from = nil;
+//	self.text = nil;
+//	self.origText = nil;
+//	self.from = nil;
+	[text release];
+	[origText release];
+	[from release];
+	[imageURL release];
+	[timeStamp release];
+	[sender release];
 	[super dealloc];
 }
 

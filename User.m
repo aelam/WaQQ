@@ -21,6 +21,22 @@
 //}
 
 - (void)dealloc {
+	[headURL release];
+	[headImage release];
+	[uid release];
+	[nick release];
+	[name release];
+	[location release];
+	
+	[introduction release];
+	[verifyInfo release];
+	[birthYear release];
+	[birthMonth release];
+	[birthDay release];
+	[countryCode release];
+	[provinceCode release];
+	[cityCode release];
+	[tags release];
 	
 	[super dealloc];
 }
