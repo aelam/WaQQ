@@ -72,6 +72,7 @@
 //	QQRequest *request  = [[QQRequest alloc] init];
 //	[request requestHomeTimelinewithFormat:@"" pageflag:0 itemCount:1 time:0];
 
+	RLog();
 	// load the app's main window for display
 	rootWindowController = [[RootWindowController alloc] init];
 	[rootWindowController showWindow:self];
