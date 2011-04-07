@@ -1,5 +1,4 @@
 .DS_Store
-WaQQ.xcodeproj/lun.pbxuser
-WaQQ.xcodeproj/lun.perspectivev3
+WaQQ.xcodeproj/*.perspectivev3
 build
-WaQQ.xcodeproj/ryan.pbxuser
+WaQQ.xcodeproj/*.pbxuser
